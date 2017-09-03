@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">ShoppingHappiness</string>
+
+    <string name="text_home">Home Fragment</string>
+    <string name="text_notifications">Notifications Fragment</string>
+    <string name="text_search">Search Fragment</string>
+
 </resources>
