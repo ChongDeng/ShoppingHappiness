@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
 import fragments.BottomNavFragment;
+import fragments.MerchandiseFragment;
 import helper.BottomNavigationViewHelper;
 
 
@@ -78,11 +79,13 @@ public class HomeActivity extends AppCompatActivity {
                         getColorFromRes(R.color.color_home));
                 break;
             case R.id.action_merchandise:
-                frag = BottomNavFragment.newInstance(getString(R.string.text_notifications),
-                        getColorFromRes(R.color.color_home));
+//                frag = BottomNavFragment.newInstance(getString(R.string.text_merchandise),
+//                        getColorFromRes(R.color.color_home));
+                  frag = MerchandiseFragment.newInstance(getString(R.string.text_merchandise),
+                           "");
                 break;
             case R.id.action_favorites:
-                frag = BottomNavFragment.newInstance(getString(R.string.text_notifications),
+                frag = BottomNavFragment.newInstance(getString(R.string.text_merchandise),
                         getColorFromRes(R.color.color_home));
                 break;
             case R.id.action_me:
@@ -102,7 +105,7 @@ public class HomeActivity extends AppCompatActivity {
 
         if (frag != null) {
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.add(R.id.container, frag, frag.getTag());
+            ft.add(R.id.fragment_container, frag, frag.getTag());
             ft.commit();
         }
     }

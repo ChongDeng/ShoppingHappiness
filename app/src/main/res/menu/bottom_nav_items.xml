@@ -7,12 +7,12 @@
 
     <item
         android:id="@+id/action_merchandise"
-        android:title="merchandise"
+        android:title="Merchandise"
         android:icon="@drawable/ic_action_merchandise"/>
 
     <item
         android:id="@+id/action_favorites"
-        android:title="favorites"
+        android:title="Favorites"
         android:icon="@drawable/ic_action_favourites"/>
 
     <item
