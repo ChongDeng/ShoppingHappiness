@@ -1,6 +1,7 @@
 package fragments;
 
 import android.content.res.Resources;
+import android.graphics.Movie;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
@@ -15,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -110,6 +112,19 @@ public class MerchandiseFragment extends Fragment {
         recyclerView.setAdapter(adapter);
 
         getMerchandise();
+
+        recyclerView.addOnItemTouchListener(new MerchandiseAdapter.RecyclerTouchListener(getActivity(), recyclerView, new MerchandiseAdapter.ClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+                Merchandise merchandise = merchandiseList.get(position);
+                Toast.makeText(getActivity(), merchandise.getName() + " is selected!", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onLongClick(View view, int position) {
+
+            }
+        }));
 
         try {
             //Glide.with(this).load(R.drawable.cover).into((ImageView) view.findViewById(R.id.backdrop));
