@@ -1,5 +1,6 @@
 package fragments;
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Movie;
 import android.graphics.Rect;
@@ -10,6 +11,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -23,6 +25,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.bumptech.glide.Glide;
 import com.chongdeng.jufeng.shoppinghappiness.MerchandiseAdapter;
+import com.chongdeng.jufeng.shoppinghappiness.MerchandiseInfoActivity;
 import com.chongdeng.jufeng.shoppinghappiness.R;
 
 import org.json.JSONArray;
@@ -118,6 +121,9 @@ public class MerchandiseFragment extends Fragment {
             public void onClick(View view, int position) {
                 Merchandise merchandise = merchandiseList.get(position);
                 Toast.makeText(getActivity(), merchandise.getName() + " is selected!", Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(getActivity(), MerchandiseInfoActivity.class);
+                startActivity(intent);
             }
 
             @Override
@@ -142,12 +148,14 @@ public class MerchandiseFragment extends Fragment {
      * Will show and hide the toolbar title on scroll
      */
     private void initCollapsingToolbar(View view) {
+
+        AppBarLayout appBarLayout = (AppBarLayout) view.findViewById(R.id.appbar);
+        appBarLayout.setExpanded(true);
+
         final CollapsingToolbarLayout collapsingToolbar =
                 (CollapsingToolbarLayout) view.findViewById(R.id.collapsing_toolbar);
         collapsingToolbar.setTitle(" ");
         //collapsingToolbar.setTitle("hello world!");
-        AppBarLayout appBarLayout = (AppBarLayout) view.findViewById(R.id.appbar);
-        appBarLayout.setExpanded(true);
 
         // hiding & showing the title when toolbar expanded & collapsed
         appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
@@ -164,6 +172,7 @@ public class MerchandiseFragment extends Fragment {
                     isShow = true;
                 } else if (isShow) {
                     collapsingToolbar.setTitle(" ");
+                    //collapsingToolbar.setTitle("test");
                     isShow = false;
                 }
             }

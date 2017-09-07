@@ -1,15 +1,16 @@
 package configs;
 
 public class AppConfig {
+	public static String restful_url_prefix = "http://10.4.1.72/ShoppingBackend/";
 	// Server user login url
-	public static String URL_LOGIN = "http://192.168.1.88/ShoppingBackend/login.php";
+	public static String URL_LOGIN = restful_url_prefix + "login.php";
 
 	// Server user register url
-	public static String URL_REGISTER = "http://192.168.1.88/ShoppingBackend/register.php";
+	public static String URL_REGISTER = restful_url_prefix + "register.php";
 
 	//merchandise cover url
-	public static String URL_MERCHANDISE_COVER = "http://192.168.1.88/ShoppingBackend/images/merchandise_cover.jpg";
+	public static String URL_MERCHANDISE_COVER = restful_url_prefix + "images/merchandise_cover.jpg";
 
 	//
-	public static final String URL_MERCHANDISE_LIST = "http://192.168.1.88/ShoppingBackend/json/merchandise_info.json";
+	public static final String URL_MERCHANDISE_LIST = restful_url_prefix + "json/merchandise_info.json";
 }
