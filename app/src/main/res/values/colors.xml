@@ -4,6 +4,15 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="colortext">#e1e5ee</color>
+
+    <color name="colorPink">#FFC0CB</color>
+    <color name="colorLightPink">#FFB6C1</color>
+
+    <color name="colorHotPink">#FF69B4</color>
+    <color name="colorDeepPink">#FF1493</color>
+
+
+    pink
     <color name="colordevider">#cfc391</color>
     <color name="signintext">#cfc391</color>
 
@@ -11,6 +20,8 @@
 
     <color name="blue">#3F51B5</color>
     <color name="blue_dark">#303F9F</color>
+    <color name="indianred">#CD5C5C</color>
+
     <color name="red">#FF4081</color>
     <color name="transparent">#0000</color>
     <color name="black">#000</color>

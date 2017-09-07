@@ -1,7 +1,10 @@
 package com.chongdeng.jufeng.shoppinghappiness;
 
+import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 import com.youth.banner.Banner;
@@ -22,6 +25,10 @@ public class MerchandiseInfoActivity extends AppCompatActivity implements OnBann
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_merchandise_info);
+
+        View view = getWindow().getDecorView().findViewById(R.id.merchandise_info);
+        initCollapsingToolbar(view);
+
         List<String> images = Arrays.asList("http://10.4.1.72/ShoppingBackend/banner/b1.jpg",
                 "http://10.4.1.72/ShoppingBackend/banner/b2.jpg",
                 "http://10.4.1.72/ShoppingBackend/banner/b3.jpg"
@@ -54,5 +61,43 @@ public class MerchandiseInfoActivity extends AppCompatActivity implements OnBann
     @Override
     public void OnBannerClick(int position) {
         Toast.makeText(getApplicationContext(),"你点击了："+position,Toast.LENGTH_SHORT).show();
+    }
+
+    /**
+     * Initializing collapsing toolbar
+     * Will show and hide the toolbar title on scroll
+     */
+    private void initCollapsingToolbar(View view) {
+
+        AppBarLayout appBarLayout = (AppBarLayout) view.findViewById(R.id.merchandise_info_appbar);
+        appBarLayout.setExpanded(true);
+
+        final CollapsingToolbarLayout collapsingToolbar =
+                (CollapsingToolbarLayout) view.findViewById(R.id.merchandise_info_collapsing_toolbar);
+        collapsingToolbar.setTitle(" ");
+        //collapsingToolbar.setTitle("hello world!");
+
+        // hiding & showing the title when toolbar expanded & collapsed
+        appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
+            boolean isShow = false;
+            int scrollRange = -1;
+
+            @Override
+            public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
+                if (scrollRange == -1) {
+                    scrollRange = appBarLayout.getTotalScrollRange();
+                }
+                if (scrollRange + verticalOffset == 0) {
+                    collapsingToolbar.setTitle("Merchandise details");
+                    collapsingToolbar.setCollapsedTitleTextColor(getResources().getColor(R.color.colortext));
+                    collapsingToolbar.setContentScrimColor(getResources().getColor(R.color.indianred));
+                    isShow = true;
+                } else if (isShow) {
+                    collapsingToolbar.setTitle(" ");
+                    //collapsingToolbar.setTitle("test");
+                    isShow = false;
+                }
+            }
+        });
     }
 }
