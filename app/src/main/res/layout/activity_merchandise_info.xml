@@ -48,23 +48,145 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <TextView
-        android:id="@+id/textView"
+    <!--<TextView-->
+        <!--android:id="@+id/textView"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:clipToPadding="false"-->
+        <!--android:scrollbars="vertical"-->
+        <!--app:layout_behavior="@string/appbar_scrolling_view_behavior"-->
+        <!--xmlns:tools="http://schemas.android.com/tools"-->
+        <!--tools:context="com.chongdeng.jufeng.shoppinghappiness.MainActivity"-->
+        <!--tools:showIn="@layout/activity_main"-->
+        <!--android:padding="10dp"-->
+        <!--android:text="-->
+					<!--第三方加载器一般都支持（资源文件、文件、Uri、assets、raw、ContentProvider、sd卡资源）-->
+
+					<!--这里只是以glide举例加载本地（资源文件）图片，-->
+					<!--加载本地图片的具体方法请参考你使用的图片加载器，-->
+					<!--图片加载的链接格式是你在setImages时设置的格式，-->
+					<!--原样返回的，所以格式问题请仔细检查！" />-->
+
+    <include layout="@layout/merchandise_sub_details" />
+
+
+    <LinearLayout
+        android:layout_gravity="bottom"
+        android:id="@+id/ll_good_detail_bottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:clipToPadding="false"
-        android:scrollbars="vertical"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        xmlns:tools="http://schemas.android.com/tools"
-        tools:context="com.chongdeng.jufeng.shoppinghappiness.MainActivity"
-        tools:showIn="@layout/activity_main"
-        android:padding="10dp"
-        android:text="
-					第三方加载器一般都支持（资源文件、文件、Uri、assets、raw、ContentProvider、sd卡资源）
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
 
-					这里只是以glide举例加载本地（资源文件）图片，
-					加载本地图片的具体方法请参考你使用的图片加载器，
-					图片加载的链接格式是你在setImages时设置的格式，
-					原样返回的，所以格式问题请仔细检查！" />
+        <LinearLayout
+            android:layout_weight="3"
+            android:paddingBottom="@dimen/spacing_tinyer"
+            android:paddingTop="@dimen/spacing_tinyer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="horizontal">
+
+            <TextView
+                android:gravity="center"
+                style="@style/greyTextStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/spacing_smallest"
+                android:layout_marginRight="@dimen/spacing_smallest"
+                android:layout_weight="1"
+                android:drawableTop="@drawable/client_service"
+                android:text="客服" />
+
+            <View
+                android:layout_width="0.5dp"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/spacing_smallest"
+                android:layout_marginTop="@dimen/spacing_smallest"
+                android:background="@color/grey_line_bg" />
+
+            <TextView
+                android:gravity="center"
+                android:id="@+id/tv_good_detail_shop"
+                style="@style/greyTextStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/spacing_smallest"
+                android:layout_marginRight="@dimen/spacing_smallest"
+                android:layout_weight="1"
+                android:drawableTop="@drawable/store"
+                android:text="店铺" />
+
+            <View
+                android:layout_width="0.5dp"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/spacing_smallest"
+                android:layout_marginTop="@dimen/spacing_smallest"
+                android:background="@color/grey_line_bg" />
+
+            <LinearLayout
+                android:id="@+id/ll_good_detail_collect"
+                android:gravity="center"
+                android:layout_marginLeft="@dimen/spacing_smallest"
+                android:layout_marginRight="@dimen/spacing_smallest"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/iv_good_detai_collect_unselect"
+                    android:src="@drawable/uncollected"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <ImageView
+                    android:id="@+id/iv_good_detai_collect_select"
+                    android:visibility="gone"
+                    android:src="@drawable/collected"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    style="@style/greyTextStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="收藏" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_weight="2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimary">
+
+            <TextView
+                android:id="@+id/tv_good_detail_shop_cart"
+                style="@style/whiteTextStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="加入购物车" />
+
+            <View
+                android:layout_width="0.5dp"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/spacing_smallest"
+                android:layout_marginTop="@dimen/spacing_smallest"
+                android:background="@color/white" />
+
+            <TextView
+                android:id="@+id/tv_good_detail_buy"
+                style="@style/whiteTextStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="立即购买" />
+        </LinearLayout>
+
+    </LinearLayout>
 
 </android.support.design.widget.CoordinatorLayout>

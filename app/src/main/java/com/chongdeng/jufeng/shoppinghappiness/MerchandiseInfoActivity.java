@@ -33,7 +33,7 @@ public class MerchandiseInfoActivity extends AppCompatActivity implements OnBann
                 "http://10.4.1.72/ShoppingBackend/banner/b2.jpg",
                 "http://10.4.1.72/ShoppingBackend/banner/b3.jpg"
         );
-        List<String> titles = Arrays.asList("武汉科技大学", "华南理工大学", "圣何塞州立大学");
+        List<String> titles = Arrays.asList("Silicon Valley", "华南理工大学", "圣何塞州立大学");
 
         Banner banner = (Banner) findViewById(R.id.banner);
         //设置banner样式
