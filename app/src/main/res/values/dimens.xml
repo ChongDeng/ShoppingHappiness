@@ -37,6 +37,7 @@
     <dimen name="font_normal">15sp</dimen>
     <dimen name="font_smaller">14sp</dimen>
     <dimen name="font_small">12sp</dimen>
+    <dimen name="text_margin">16dp</dimen>
 
 
 </resources>
