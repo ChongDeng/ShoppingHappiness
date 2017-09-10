@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
 import fragments.BottomNavFragment;
+import fragments.FavoritesFragment;
 import fragments.MerchandiseFragment;
 import helper.BottomNavigationViewHelper;
 
@@ -75,21 +76,23 @@ public class HomeActivity extends AppCompatActivity {
         // init corresponding fragment
         switch (item.getItemId()) {
             case R.id.action_home:
-                frag = BottomNavFragment.newInstance(getString(R.string.text_home),
+                  frag = BottomNavFragment.newInstance(getString(R.string.text_home),
                         getColorFromRes(R.color.color_home));
-                break;
+                  break;
             case R.id.action_merchandise:
 //                frag = BottomNavFragment.newInstance(getString(R.string.text_merchandise),
 //                        getColorFromRes(R.color.color_home));
                   frag = MerchandiseFragment.newInstance(getString(R.string.text_merchandise),
                            "");
-                break;
+                    break;
             case R.id.action_favorites:
-                frag = BottomNavFragment.newInstance(getString(R.string.text_merchandise),
-                        getColorFromRes(R.color.color_home));
+                frag = FavoritesFragment.newInstance("Fovorites Fragments",
+                        "");
+//                frag = BottomNavFragment.newInstance("favorites",
+//                        getColorFromRes(R.color.color_home));
                 break;
             case R.id.action_me:
-                frag = BottomNavFragment.newInstance(getString(R.string.text_search),
+                frag = BottomNavFragment.newInstance("About Me",
                         getColorFromRes(R.color.color_home));
                 break;
         }
@@ -107,6 +110,9 @@ public class HomeActivity extends AppCompatActivity {
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.add(R.id.fragment_container, frag, frag.getTag());
             ft.commit();
+        }
+        else{
+            System.out.println("hello");
         }
     }
 

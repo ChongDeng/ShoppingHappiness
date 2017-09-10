@@ -10,6 +10,7 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -123,6 +124,9 @@ public class MerchandiseFragment extends Fragment {
                 Toast.makeText(getActivity(), merchandise.getName() + " is selected!", Toast.LENGTH_SHORT).show();
 
                 Intent intent = new Intent(getActivity(), MerchandiseInfoActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable(MerchandiseInfoActivity.MerchandiseInfoTag, merchandise);
+                intent.putExtras(bundle);
                 startActivity(intent);
             }
 
@@ -244,6 +248,7 @@ public class MerchandiseFragment extends Fragment {
                                 merchandise.setName(object.getString("name"));
                                 merchandise.setThumbnail(object.getString("thumbnail_url"));
                                 merchandise.setNumOfSongs(object.getInt("numOfSongs"));
+                                merchandise.setId(object.getInt("id"));
 
                                 merchandiseList.add(merchandise);
                             } catch (JSONException e) {

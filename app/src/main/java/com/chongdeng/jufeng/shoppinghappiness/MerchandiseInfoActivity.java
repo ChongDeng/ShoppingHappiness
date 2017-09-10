@@ -5,6 +5,7 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.youth.banner.Banner;
@@ -16,10 +17,15 @@ import java.util.Arrays;
 import java.util.List;
 
 import helper.GlideImageLoader;
+import helper.MerchandiseLab;
+import model.Merchandise;
 
 public class MerchandiseInfoActivity extends AppCompatActivity implements OnBannerListener {
 
-    public String MerchandiseInfoTag = "Merchandise";
+    public static String MerchandiseInfoTag = "Merchandise";
+    Merchandise merchandise = null;
+
+    ImageView merchandise_favor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,11 +33,41 @@ public class MerchandiseInfoActivity extends AppCompatActivity implements OnBann
         setContentView(R.layout.activity_merchandise_info);
 
         View view = getWindow().getDecorView().findViewById(R.id.merchandise_info);
-        initCollapsingToolbar(view);
+        InitCollapsingToolbar(view);
 
-        List<String> images = Arrays.asList("http://10.4.1.72/ShoppingBackend/banner/b1.jpg",
-                "http://10.4.1.72/ShoppingBackend/banner/b2.jpg",
-                "http://10.4.1.72/ShoppingBackend/banner/b3.jpg"
+        InitBanner();
+
+        merchandise = (Merchandise) getIntent().getSerializableExtra(MerchandiseInfoTag);
+
+        merchandise_favor = (ImageView) findViewById(R.id.merchandise_favor);
+        EnableMerchandiseFavored(isMerchandiseFavored());
+        merchandise_favor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EnableMerchandiseFavored(!isMerchandiseFavored());
+            }
+        });
+    }
+
+    public void EnableMerchandiseFavored(boolean favored){
+        if(favored){
+            merchandise_favor.setImageResource(R.drawable.collected);
+            MerchandiseLab.get(getApplication()).AddMerchandise(merchandise);
+        }
+        else{
+            merchandise_favor.setImageResource(R.drawable.uncollected);
+            MerchandiseLab.get(getApplication()).RemoveMerchandise(merchandise);
+        }
+    }
+
+    public boolean isMerchandiseFavored(){
+        return MerchandiseLab.get(getApplication()).ContainMerchandise(merchandise);
+    }
+
+    public void InitBanner(){
+        List<String> images = Arrays.asList("http://192.168.1.88/ShoppingBackend/banner/b1.jpg",
+                "http://192.168.1.88/ShoppingBackend/banner/b2.jpg",
+                "http://192.168.1.88/ShoppingBackend/banner/b3.jpg"
         );
         List<String> titles = Arrays.asList("Silicon Valley", "华南理工大学", "圣何塞州立大学");
 
@@ -67,7 +103,7 @@ public class MerchandiseInfoActivity extends AppCompatActivity implements OnBann
      * Initializing collapsing toolbar
      * Will show and hide the toolbar title on scroll
      */
-    private void initCollapsingToolbar(View view) {
+    private void InitCollapsingToolbar(View view) {
 
         AppBarLayout appBarLayout = (AppBarLayout) view.findViewById(R.id.merchandise_info_appbar);
         appBarLayout.setExpanded(true);
