@@ -39,5 +39,22 @@
     <dimen name="font_small">12sp</dimen>
     <dimen name="text_margin">16dp</dimen>
 
+    <dimen name="card_content_horizontal_space_with_4dp_padding">12dp</dimen>
+    <dimen name="card_content_horizontal_space_with_12dp_padding">4dp</dimen>
+    <dimen name="card_content_horizontal_space_with_16dp_padding">0dp</dimen>
+    <dimen name="card_content_horizontal_space">16dp</dimen>
+
+    <dimen name="card_content_vertical_margin">16dp</dimen>
+    <dimen name="card_content_vertical_margin_with_4dp_padding">12dp</dimen>
+    <dimen name="card_content_vertical_margin_with_12dp_padding">4dp</dimen>
+    <dimen name="card_content_vertical_margin_small">8dp</dimen>
+
+
+    <dimen name="touch_target_size">48dp</dimen>
+
+    <dimen name="avatar_size">40dp</dimen>
+    <dimen name="avatar_padding">4dp</dimen>
+    <dimen name="avatar_small_padding">12dp</dimen>
+
 
 </resources>

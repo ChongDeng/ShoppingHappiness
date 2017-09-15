@@ -203,12 +203,25 @@
             android:orientation="vertical"
             android:padding="@dimen/spacing_small">
 
-            <TextView
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="商品评价"
-                android:drawableRight="@drawable/rightarrow"/>
+                android:layout_height="wrap_content">
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="商品评价" />
+
+                <TextView
+                    android:id="@+id/get_more_merchandise_reviews"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:textColor="@color/colorHotPink"
+                    android:textStyle="bold"
+                    android:text="更多评论" />
+
+            </RelativeLayout>
 
 
             <LinearLayout

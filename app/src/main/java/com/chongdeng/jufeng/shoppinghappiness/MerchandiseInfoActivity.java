@@ -1,11 +1,13 @@
 package com.chongdeng.jufeng.shoppinghappiness;
 
+import android.content.Intent;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.youth.banner.Banner;
@@ -16,6 +18,7 @@ import com.youth.banner.listener.OnBannerListener;
 import java.util.Arrays;
 import java.util.List;
 
+import configs.AppConfig;
 import helper.GlideImageLoader;
 import helper.MerchandiseLab;
 import model.Merchandise;
@@ -26,6 +29,8 @@ public class MerchandiseInfoActivity extends AppCompatActivity implements OnBann
     Merchandise merchandise = null;
 
     ImageView merchandise_favor;
+
+    TextView get_more_merchandise_reviews;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +52,15 @@ public class MerchandiseInfoActivity extends AppCompatActivity implements OnBann
                 EnableMerchandiseFavored(!isMerchandiseFavored());
             }
         });
+
+        get_more_merchandise_reviews = (TextView) findViewById(R.id.get_more_merchandise_reviews); ;
+        get_more_merchandise_reviews.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MerchandiseInfoActivity.this, MerchandiseReviewActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     public void EnableMerchandiseFavored(boolean favored){
@@ -65,9 +79,9 @@ public class MerchandiseInfoActivity extends AppCompatActivity implements OnBann
     }
 
     public void InitBanner(){
-        List<String> images = Arrays.asList("http://192.168.1.88/ShoppingBackend/banner/b1.jpg",
-                "http://192.168.1.88/ShoppingBackend/banner/b2.jpg",
-                "http://192.168.1.88/ShoppingBackend/banner/b3.jpg"
+        List<String> images = Arrays.asList(AppConfig.restful_url_prefix + "banner/b1.jpg",
+                AppConfig.restful_url_prefix + "banner/b2.jpg",
+                AppConfig.restful_url_prefix + "banner/b3.jpg"
         );
         List<String> titles = Arrays.asList("Silicon Valley", "华南理工大学", "圣何塞州立大学");
 

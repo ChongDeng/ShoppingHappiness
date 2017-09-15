@@ -23,6 +23,9 @@
         <activity android:name=".SignupActivity" />
         <activity android:name=".HomeActivity" />
         <activity android:name=".MerchandiseInfoActivity" />
+        <activity
+            android:name=".MerchandiseReviewActivity"
+            android:label="@string/title_activity_merchandise_review"></activity>
     </application>
 
 </manifest>

@@ -1,7 +1,8 @@
 package configs;
 
 public class AppConfig {
-	public static String restful_url_prefix = "http://192.168.1.88/ShoppingBackend/";
+//	public static String restful_url_prefix = "http://192.168.1.88/ShoppingBackend/";
+    public static String restful_url_prefix = "http://10.4.1.72/ShoppingBackend/";
 	// Server user login url
 	public static String URL_LOGIN = restful_url_prefix + "login.php";
 
@@ -13,4 +14,6 @@ public class AppConfig {
 
 	//
 	public static final String URL_MERCHANDISE_LIST = restful_url_prefix + "json/merchandise_info.json";
+
+	public static final String URL_MERCHANDISE_Review = restful_url_prefix + "json/merchandise_review.json";
 }
