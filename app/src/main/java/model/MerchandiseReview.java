@@ -15,6 +15,7 @@ public class MerchandiseReview {
     private String name;
     private String time;
     private String review;
+    private int rate_star;
 
     public MerchandiseReview() {
     }
@@ -50,6 +51,14 @@ public class MerchandiseReview {
 
     public void setReview(String review) {
         this.review = review;
+    }
+
+    public int getRateStar() {
+        return rate_star;
+    }
+
+    public void setRateStar(int rate_star) {
+        this.rate_star = rate_star;
     }
 }
 

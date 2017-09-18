@@ -13,11 +13,17 @@
     <color name="colordevider">#cfc391</color>
     <color name="signintext">#cfc391</color>
 
+    <color name="yellow">#ffff00</color>
+    <color name="gold">#FFD700</color>
+
     <color name="color_home">#009688</color>
 
     <color name="blue">#3F51B5</color>
     <color name="blue_dark">#303F9F</color>
     <color name="indianred">#CD5C5C</color>
+
+    <color name="green">#A4C639</color>
+    <color name="lime_green">#32CD32</color>
 
     <color name="red">#FF4081</color>
     <color name="transparent">#0000</color>

@@ -1,5 +1,6 @@
 package com.chongdeng.jufeng.shoppinghappiness;
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Rect;
 import android.os.Bundle;
@@ -10,6 +11,8 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -36,11 +39,16 @@ public class MerchandiseReviewActivity extends Activity {
     private MerchandiseReviewAdapter adapter;
     private List<MerchandiseReview> merchandise_review_list;
 
+    String MerchadiseName = null;
+
+    Button write_review_button;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_merchandise_review);
 
+        MerchadiseName = getIntent().getStringExtra("merchandise name");
 
         review_recycler_view = (RecyclerView) findViewById(R.id.review_recycler_view);
         merchandise_review_list = new ArrayList<>();
@@ -55,6 +63,17 @@ public class MerchandiseReviewActivity extends Activity {
         review_recycler_view.setAdapter(adapter);
 
         getMerchandiseReview();
+
+        write_review_button = (Button) findViewById(R.id.write_review_button);
+        write_review_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MerchandiseReviewActivity.this, MerchandiseWriteReviewActivity.class);
+                intent.putExtra("merchandise name", MerchadiseName);
+                startActivity(intent);
+            }
+        });
+
     }
 
     private void getMerchandiseReview() {
@@ -75,6 +94,7 @@ public class MerchandiseReviewActivity extends Activity {
                                 review.setName(object.getString("name"));
                                 review.setTime(object.getString("time"));
                                 review.setReview(object.getString("review"));
+                                review.setRateStar(object.getInt("rate_star"));
 
                                 merchandise_review_list.add(review);
                             } catch (JSONException e) {

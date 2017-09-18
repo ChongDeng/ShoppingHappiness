@@ -25,7 +25,8 @@
         <activity android:name=".MerchandiseInfoActivity" />
         <activity
             android:name=".MerchandiseReviewActivity"
-            android:label="@string/title_activity_merchandise_review"></activity>
+            android:label="@string/title_activity_merchandise_review" />
+        <activity android:name=".MerchandiseWriteReviewActivity"></activity>
     </application>
 
 </manifest>

@@ -32,6 +32,8 @@ public class MerchandiseInfoActivity extends AppCompatActivity implements OnBann
 
     TextView get_more_merchandise_reviews;
 
+    TextView write_review;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +60,17 @@ public class MerchandiseInfoActivity extends AppCompatActivity implements OnBann
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MerchandiseInfoActivity.this, MerchandiseReviewActivity.class);
+                intent.putExtra("merchandise name", merchandise.getName());
+                startActivity(intent);
+            }
+        });
+
+        write_review = (TextView) findViewById(R.id.write_review); ;
+        write_review.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MerchandiseInfoActivity.this, MerchandiseWriteReviewActivity.class);
+                intent.putExtra("merchandise name", merchandise.getName());
                 startActivity(intent);
             }
         });

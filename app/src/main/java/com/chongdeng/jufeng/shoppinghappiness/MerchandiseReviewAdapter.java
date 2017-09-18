@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -32,6 +33,9 @@ public class MerchandiseReviewAdapter extends RecyclerView.Adapter<MerchandiseRe
         public de.hdodenhof.circleimageview.CircleImageView thumbnail;
         public TextView name, time, review_content;
 
+        public ImageView review_star1, review_star2, review_star3,
+                review_star4, review_star5;
+
         public MyViewHolder(View view) {
             super(view);            
             
@@ -39,6 +43,12 @@ public class MerchandiseReviewAdapter extends RecyclerView.Adapter<MerchandiseRe
             name = (TextView) view.findViewById(R.id.name);
             time = (TextView) view.findViewById(R.id.review_time);
             review_content = (TextView) view.findViewById(R.id.review_content);
+
+            review_star1 = (ImageView) view.findViewById(R.id.review_star1);
+            review_star2 = (ImageView) view.findViewById(R.id.review_star2);
+            review_star3 = (ImageView) view.findViewById(R.id.review_star3);
+            review_star4 = (ImageView) view.findViewById(R.id.review_star4);
+            review_star5 = (ImageView) view.findViewById(R.id.review_star5);
         }
     }
 
@@ -65,6 +75,45 @@ public class MerchandiseReviewAdapter extends RecyclerView.Adapter<MerchandiseRe
 
         // loading thumbnail cover using Glide library
         Glide.with(mContext).load(review.getAvatar()).into(holder.thumbnail);
+
+        switch(review.getRateStar()){
+            case 0:
+                holder.review_star1.setVisibility(View.GONE);
+                holder.review_star2.setVisibility(View.GONE);
+                holder.review_star3.setVisibility(View.GONE);
+                holder.review_star4.setVisibility(View.GONE);
+                holder.review_star5.setVisibility(View.GONE);
+                break;
+
+            case 1:
+                holder.review_star1.setVisibility(View.GONE);
+                holder.review_star2.setVisibility(View.GONE);
+                holder.review_star3.setVisibility(View.GONE);
+                holder.review_star4.setVisibility(View.GONE);
+                break;
+
+            case 2:
+                holder.review_star1.setVisibility(View.GONE);
+                holder.review_star2.setVisibility(View.GONE);
+                holder.review_star3.setVisibility(View.GONE);
+                break;
+
+            case 3:
+                holder.review_star1.setVisibility(View.GONE);
+                holder.review_star2.setVisibility(View.GONE);
+                break;
+
+            case 4:
+                holder.review_star1.setVisibility(View.GONE);
+                break;
+
+            case 5:
+                break;
+
+            default:
+                Log.e("rate", "wrong rates");
+                break;
+        }
     }
 
 

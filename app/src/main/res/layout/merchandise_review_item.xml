@@ -16,13 +16,13 @@
 
     <TextView
         android:id="@+id/name"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/avatar"
-        android:layout_toLeftOf="@+id/review_time"
         android:layout_alignTop="@id/avatar"
         android:layout_marginLeft="@dimen/card_content_horizontal_space_with_12dp_padding"
         android:layout_marginTop="@dimen/avatar_small_padding"
+        android:layout_toLeftOf="@+id/stars"
+        android:layout_toRightOf="@id/avatar"
         android:ellipsize="end"
         android:maxLines="1"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
@@ -57,6 +57,51 @@
         android:layout_below="@id/review_content"
         android:layout_marginTop="@dimen/card_content_vertical_margin"
         android:background="?android:dividerHorizontal" />
+
+    <LinearLayout
+        android:id="@+id/stars"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/name"
+        android:layout_marginLeft="@dimen/card_content_horizontal_space"
+        android:layout_alignParentRight="true">
+
+        <ImageView
+            android:id="@+id/review_star1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/review_star_rated"
+            />
+
+        <ImageView
+            android:id="@+id/review_star2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/spacing_tinyest"
+            android:src="@drawable/review_star_rated" />
+
+        <ImageView
+            android:id="@+id/review_star3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/spacing_tinyest"
+            android:src="@drawable/review_star_rated"
+            />
+
+        <ImageView
+            android:id="@+id/review_star4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/spacing_tinyest"
+            android:src="@drawable/review_star_rated" />
+
+        <ImageView
+            android:id="@+id/review_star5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/spacing_tinyest"
+            android:src="@drawable/review_star_rated" />
+    </LinearLayout>
 
 
 </RelativeLayout>

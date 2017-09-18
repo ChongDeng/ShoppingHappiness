@@ -48,4 +48,9 @@
         <item name="android:textColor">@color/colorPrimary</item>
     </style>
 
+    <style name="RatingBar" parent="Theme.AppCompat">
+        <item name="colorControlNormal">@color/grey_text_color_normal</item>
+        <item name="colorControlActivated">@color/gold</item>
+    </style>
+
 </resources>

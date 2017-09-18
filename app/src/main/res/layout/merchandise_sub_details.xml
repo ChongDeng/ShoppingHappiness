@@ -184,13 +184,14 @@
             android:background="@color/grey_line_bg" />
 
         <TextView
-            android:background="@drawable/list_gray_item"
-            android:id="@+id/tv_good_detail_cate"
+            android:id="@+id/write_review"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/list_gray_item"
             android:drawableRight="@drawable/rightarrow"
             android:padding="@dimen/spacing_small"
-            android:text="选择  产品分类" />
+            android:text="写评论"
+            android:textColor="@color/red" />
 
         <View
             android:layout_width="match_parent"
@@ -219,7 +220,8 @@
                     android:layout_alignParentRight="true"
                     android:textColor="@color/colorHotPink"
                     android:textStyle="bold"
-                    android:text="更多评论" />
+                    android:background="@drawable/bg_border_color_primary"
+                    android:text="查看更多评论" />
 
             </RelativeLayout>
 
@@ -248,34 +250,34 @@
                             android:text="谢依霖" />
 
                         <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentRight="true">
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true">
 
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:src="@drawable/da_ren_list_star" />
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/da_ren_list_star" />
 
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="@dimen/spacing_tinyest"
-                                android:src="@drawable/da_ren_list_star" />
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/spacing_tinyest"
+                        android:src="@drawable/da_ren_list_star" />
 
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="@dimen/spacing_tinyest"
-                                android:src="@drawable/da_ren_list_star" />
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/spacing_tinyest"
+                        android:src="@drawable/da_ren_list_star" />
 
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="@dimen/spacing_tinyest"
-                                android:src="@drawable/da_ren_list_star" />
-                        </LinearLayout>
-                    </RelativeLayout>
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/spacing_tinyest"
+                        android:src="@drawable/da_ren_list_star" />
+                </LinearLayout>
+                </RelativeLayout>
 
                     <TextView
                         style="@style/greyTextStyleSmaller"
@@ -289,13 +291,6 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/spacing_tinyest"
                         android:text="第二次来找这个零食了，第一次吃就开始爱上了，还是跟原来一样的味道" />
-
-                    <TextView
-                        style="@style/greyTextStyleSmall"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/spacing_tinyest"
-                        android:text="颜色分类：原味" />
 
                 </LinearLayout>
 

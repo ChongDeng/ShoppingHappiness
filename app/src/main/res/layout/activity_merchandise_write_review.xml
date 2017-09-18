@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingRight="5dp"
+    android:paddingBottom="5dp">
+
+
+
+
+    <RelativeLayout
+        android:id="@+id/top_line"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        >
+
+        <TextView
+            android:id="@+id/MerchandiseName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:textSize="20dp"
+            android:textColor="@color/black"/>
+
+        <ImageView
+            android:id="@+id/close_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/close"
+            android:layout_alignParentRight="true"/>
+
+    </RelativeLayout>
+
+    <RatingBar
+        android:id="@+id/rating_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/top_line"
+        android:numStars="5"
+        android:stepSize="1.0"
+        android:theme="@style/RatingBar"
+        />
+
+    <EditText
+        android:id="@+id/review_content"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rating_bar"
+        android:background="#00000000"
+        android:layout_margin="5dp"
+        android:inputType="textMultiLine"
+        android:gravity="top"
+        android:hint="例如，这件应该是最喜欢吃的牛排馆。如果你想吃顿好的，这里绝对贵得有道理。服务生Tom非常棒，都会跟我们介绍应该配哪种酒。当然，主角牛排绝对亮眼，大赞！"
+        />
+
+
+
+    <Button
+        android:id="@+id/post_review"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="post"
+        android:textSize="15dp"
+        android:textStyle="bold"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/scut_button"/>
+
+</RelativeLayout>
+
