@@ -26,7 +26,11 @@
         <activity
             android:name=".MerchandiseReviewActivity"
             android:label="@string/title_activity_merchandise_review" />
-        <activity android:name=".MerchandiseWriteReviewActivity"></activity>
+        <activity android:name=".MerchandiseWriteReviewActivity" />
+        <activity
+            android:name=".MerchandiseSearchPageActivity"
+            android:theme="@style/MyTheme" />
+        <activity android:name=".MerchandiseSearchResultActivity"></activity>
     </application>
 
 </manifest>

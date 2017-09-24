@@ -1,0 +1,10 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:actionViewClass="android.widget.SearchView"
+        android:id="@+id/searchView"
+        android:orderInCategory="100"
+        android:title="Search"
+        android:icon="@drawable/ic_search_transparent"
+        app:showAsAction="collapseActionView|ifRoom"/>
+</menu>

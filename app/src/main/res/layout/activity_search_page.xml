@@ -1,0 +1,76 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="热门搜索"
+        android:textSize="18sp"/>
+
+    <View
+        style="@style/gray_height_1dp"
+        android:layout_marginTop="3dp"/>
+
+    <com.zhy.view.flowlayout.TagFlowLayout
+        android:id="@+id/search_page_flowlayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="搜索历史"
+        android:textSize="18dp"/>
+    <View
+        style="@style/gray_height_1dp"
+        android:layout_marginTop="3dp"/>
+
+    <ListView
+        android:id="@+id/search_history_listview"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:divider="@null"
+        android:dividerHeight="5dp"/>
+
+    <RelativeLayout
+        android:id="@+id/search_history_rl"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="#00000000"
+        android:visibility="gone">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_centerHorizontal="true"
+            android:text="无搜索记录"/>
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/delete_search_history"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:text="清空搜索历史"
+        android:textColor="@color/white"
+        android:background="@drawable/button_shape"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_gravity="center_horizontal" />
+
+</LinearLayout>

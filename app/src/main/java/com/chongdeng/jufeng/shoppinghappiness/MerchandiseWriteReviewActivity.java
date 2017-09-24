@@ -60,9 +60,10 @@ public class MerchandiseWriteReviewActivity extends AppCompatActivity {
                     return;
                 }
 
-
-                Toast.makeText(getApplication(), review_content_view.getText().toString(),
+                //upload function
+                Toast.makeText(getApplication(), "write review successfully!",
                         Toast.LENGTH_SHORT).show();
+                finish();
             }
         });
 

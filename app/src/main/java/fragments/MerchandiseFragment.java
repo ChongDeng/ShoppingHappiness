@@ -2,7 +2,6 @@ package fragments;
 
 import android.content.Intent;
 import android.content.res.Resources;
-import android.graphics.Movie;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
@@ -10,9 +9,7 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -28,6 +25,7 @@ import com.bumptech.glide.Glide;
 import com.chongdeng.jufeng.shoppinghappiness.MerchandiseAdapter;
 import com.chongdeng.jufeng.shoppinghappiness.MerchandiseInfoActivity;
 import com.chongdeng.jufeng.shoppinghappiness.R;
+import com.chongdeng.jufeng.shoppinghappiness.MerchandiseSearchPageActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -50,6 +48,8 @@ public class MerchandiseFragment extends Fragment {
     private RecyclerView recyclerView;
     private MerchandiseAdapter adapter;
     private List<Merchandise> merchandiseList;
+
+    ImageView search_icon;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -115,7 +115,7 @@ public class MerchandiseFragment extends Fragment {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
 
-        getMerchandise();
+        getMerchandiseList();
 
         recyclerView.addOnItemTouchListener(new MerchandiseAdapter.RecyclerTouchListener(getActivity(), recyclerView, new MerchandiseAdapter.ClickListener() {
             @Override
@@ -142,6 +142,15 @@ public class MerchandiseFragment extends Fragment {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        search_icon = (ImageView) view.findViewById(R.id.merchandise_serch);
+        search_icon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent it = new Intent(getActivity(), MerchandiseSearchPageActivity.class);
+                startActivity(it);
+            }
+        });
 
         return view;
     }
@@ -173,6 +182,7 @@ public class MerchandiseFragment extends Fragment {
                 }
                 if (scrollRange + verticalOffset == 0) {
                     collapsingToolbar.setTitle(getString(R.string.app_name));
+                    collapsingToolbar.setContentScrimColor(getResources().getColor(R.color.color_home));
                     isShow = true;
                 } else if (isShow) {
                     collapsingToolbar.setTitle(" ");
@@ -231,7 +241,7 @@ public class MerchandiseFragment extends Fragment {
 //    }
 
 
-    private void getMerchandise() {
+    private void getMerchandiseList() {
         JsonArrayRequest req = new JsonArrayRequest(AppConfig.URL_MERCHANDISE_LIST,
                 new Response.Listener<JSONArray>() {
                     @Override
