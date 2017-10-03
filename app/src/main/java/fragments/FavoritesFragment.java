@@ -101,7 +101,6 @@ public class FavoritesFragment extends Fragment {
         // Inflate the layout for this fragment
         final View view = inflater.inflate(R.layout.fragment_favorites, container, false);
 
-
         recyclerView = (RecyclerView) view.findViewById(R.id.favourites_list_recycler_view);
 
         merchandiseList = new ArrayList<>();
@@ -117,7 +116,7 @@ public class FavoritesFragment extends Fragment {
 
         getMerchandiseFavouritesList();
 
-        recyclerView.addOnItemTouchListener(new MerchandiseAdapter.RecyclerTouchListener(getActivity(), recyclerView, new MerchandiseAdapter.ClickListener() {
+        recyclerView.addOnItemTouchListener(new FavouritesMerchandiseAdapter.RecyclerTouchListener(getActivity(), recyclerView, new FavouritesMerchandiseAdapter.ClickListener() {
             @Override
             public void onClick(View view, int position) {
                 Merchandise merchandise = merchandiseList.get(position);
@@ -131,7 +130,6 @@ public class FavoritesFragment extends Fragment {
 
             @Override
             public void onLongClick(View view, int position) {
-
             }
         }));
 

@@ -35,6 +35,7 @@
     <color name="album_title">#4c4c4c</color>
 
 
+    <color name="grey">#8C8C8C</color>
     <color name="grey_text_color_normal">#8A8A8A</color>
     <color name="grey_line_bg">#E4E4E4</color>
     <color name="original_border_color">#F18459</color>

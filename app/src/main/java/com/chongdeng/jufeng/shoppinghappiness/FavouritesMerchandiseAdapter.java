@@ -82,9 +82,9 @@ public class FavouritesMerchandiseAdapter extends RecyclerView.Adapter<Favourite
     public static class RecyclerTouchListener implements RecyclerView.OnItemTouchListener {
 
         private GestureDetector gestureDetector;
-        private MerchandiseAdapter.ClickListener clickListener;
+        private FavouritesMerchandiseAdapter.ClickListener clickListener;
 
-        public RecyclerTouchListener(Context context, final RecyclerView recyclerView, final MerchandiseAdapter.ClickListener clickListener) {
+        public RecyclerTouchListener(Context context, final RecyclerView recyclerView, final FavouritesMerchandiseAdapter.ClickListener clickListener) {
             this.clickListener = clickListener;
             gestureDetector = new GestureDetector(context, new GestureDetector.SimpleOnGestureListener() {
                 @Override

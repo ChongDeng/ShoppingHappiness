@@ -12,8 +12,9 @@ public class AppConfig {
 	//merchandise cover url
 	public static String URL_MERCHANDISE_COVER = restful_url_prefix + "images/merchandise_cover.jpg";
 
-	//
 	public static final String URL_MERCHANDISE_LIST = restful_url_prefix + "json/merchandise_info.json";
 
 	public static final String URL_MERCHANDISE_Review = restful_url_prefix + "json/merchandise_review.json";
+
+	public static final String URL_HOME_PAGE_DATA = restful_url_prefix + "json/home_page_data.json";
 }

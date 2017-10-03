@@ -56,5 +56,7 @@
     <dimen name="avatar_padding">4dp</dimen>
     <dimen name="avatar_small_padding">12dp</dimen>
 
+    <dimen name="textSize_small">14sp</dimen>
+
 
 </resources>

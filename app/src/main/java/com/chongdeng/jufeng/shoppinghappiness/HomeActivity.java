@@ -12,6 +12,7 @@ import android.view.MenuItem;
 
 import fragments.BottomNavFragment;
 import fragments.FavoritesFragment;
+import fragments.HomeFragment;
 import fragments.MerchandiseFragment;
 import helper.BottomNavigationViewHelper;
 
@@ -23,7 +24,7 @@ import helper.BottomNavigationViewHelper;
 public class HomeActivity extends AppCompatActivity {
     private static final String SELECTED_ITEM = "arg_selected_item";
 
-    private BottomNavigationView mBottomNav;
+    public BottomNavigationView mBottomNav;
     private int mSelectedItem;
 
     @Override
@@ -71,13 +72,13 @@ public class HomeActivity extends AppCompatActivity {
         }
     }
 
-    private void selectFragment(MenuItem item) {
+    public void selectFragment(MenuItem item) {
         Fragment frag = null;
         // init corresponding fragment
         switch (item.getItemId()) {
             case R.id.action_home:
-                  frag = BottomNavFragment.newInstance(getString(R.string.text_home),
-                        getColorFromRes(R.color.color_home));
+                  frag = HomeFragment.newInstance(getString(R.string.text_home),
+                        "");
                   break;
             case R.id.action_merchandise:
 //                frag = BottomNavFragment.newInstance(getString(R.string.text_merchandise),
