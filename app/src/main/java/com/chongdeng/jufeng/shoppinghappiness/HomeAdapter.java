@@ -18,6 +18,7 @@ import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
 import com.youth.banner.listener.OnBannerListener;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -36,7 +37,7 @@ import model.Merchandise;
 public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.MyViewHolder> implements OnBannerListener {
 
     public static final int BANNER_VIEW_TYPE = 1;
-    public static final int SHORTCUT_VIEW_TYPE = 2;
+    public static final int COMMONFUNC_VIEW_TYPE = 2;
     public static final int NEWS_VIEW_TYPE = 3;
     public static final int QUERYMORE_VIEW_TYPE = 4;
     public static final int MERCHANDISE_VIEW_TYPE = 5;
@@ -83,6 +84,17 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.MyViewHolder> 
                         .inflate(R.layout.home_banner, parent, false);
                 break;
 
+            case COMMONFUNC_VIEW_TYPE:
+                itemView = LayoutInflater.from(parent.getContext())
+                        .inflate(R.layout.home_common_func, parent, false);
+                break;
+
+            case HomeAdapter.QUERYMORE_VIEW_TYPE:
+
+                itemView = LayoutInflater.from(parent.getContext())
+                        .inflate(R.layout.home_query_more, parent, false);
+                break;
+
             case MERCHANDISE_VIEW_TYPE:
                 itemView = LayoutInflater.from(parent.getContext())
                         .inflate(R.layout.favourites_merchandise_cardview_item, parent, false);
@@ -95,12 +107,15 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.MyViewHolder> 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
 
-        HomePageBean homt_page_bean = home_page_bean_list.get(position);
+        HomePageBean home_page_bean = home_page_bean_list.get(position);
 
         switch (getItemViewType(position)) {
             case BANNER_VIEW_TYPE:
 
-                List<String> images = homt_page_bean.getBanner_urls();
+                List<String> images = new ArrayList<String>();
+                for(HomePageBean.BannerBean banner_bean : home_page_bean.getBannerBeans()){
+                    images.add(banner_bean.getUrl());
+                }
 
                 Banner banner = (Banner)  holder.getView(R.id.home_banner);
 
@@ -128,16 +143,47 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.MyViewHolder> 
                 //banner设置方法全部调用完毕时最后调用
                 banner.start();
                 break;
+
+            case COMMONFUNC_VIEW_TYPE:
+
+                ImageView pic1 = (ImageView) holder.getView(R.id.home_common_func_pic1);
+                ImageView pic2 = (ImageView) holder.getView(R.id.home_common_func_pic2);
+                ImageView pic3 = (ImageView) holder.getView(R.id.home_common_func_pic3);
+                ImageView pic4 = (ImageView) holder.getView(R.id.home_common_func_pic4);
+
+                TextView pic1_description = (TextView) holder.getView(R.id.pic1_description);
+                TextView pic2_description = (TextView) holder.getView(R.id.pic2_description);
+                TextView pic3_description = (TextView) holder.getView(R.id.pic3_description);
+                TextView pic4_description = (TextView) holder.getView(R.id.pic4_description);
+
+                ArrayList<HomePageBean.CommonFunctionBean> common_func_beans =  home_page_bean.getCommonFuncBeans();
+
+                Glide.with(mContext).load(common_func_beans.get(0).getPicUrl()).into(pic1);
+                Glide.with(mContext).load(common_func_beans.get(1).getPicUrl()).into(pic2);
+                Glide.with(mContext).load(common_func_beans.get(2).getPicUrl()).into(pic3);
+                Glide.with(mContext).load(common_func_beans.get(3).getPicUrl()).into(pic4);
+
+                pic1_description.setText(common_func_beans.get(0).getPicDescription());
+                pic2_description.setText(common_func_beans.get(1).getPicDescription());
+                pic3_description.setText(common_func_beans.get(2).getPicDescription());
+                pic4_description.setText(common_func_beans.get(3).getPicDescription());
+
+                break;
+
+            case QUERYMORE_VIEW_TYPE:
+
+                break;
+
             case MERCHANDISE_VIEW_TYPE:
                 TextView title = (TextView) holder.getView(R.id.title);
                 TextView count = (TextView) holder.getView(R.id.count);
                 ImageView thumbnail = (ImageView) holder.getView(R.id.thumbnail);
 
-                title.setText(homt_page_bean.getName());
-                count.setText(homt_page_bean.getNumOfSongs() + " songs");
+                title.setText(home_page_bean.getName());
+                count.setText(home_page_bean.getNumOfSongs() + " songs");
 
                 // loading album cover using Glide library
-                Glide.with(mContext).load(homt_page_bean.getThumbnail()).into(thumbnail);
+                Glide.with(mContext).load(home_page_bean.getThumbnail()).into(thumbnail);
                 break;
         }
     }

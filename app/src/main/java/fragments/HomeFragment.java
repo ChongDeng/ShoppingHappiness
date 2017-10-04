@@ -136,6 +136,15 @@ public class HomeFragment extends Fragment {
                     case HomeAdapter.BANNER_VIEW_TYPE:
                         span = 2;
                         break;
+
+                    case HomeAdapter.COMMONFUNC_VIEW_TYPE:
+                        span = 2;
+                        break;
+
+                    case HomeAdapter.QUERYMORE_VIEW_TYPE:
+                        span = 2;
+                        break;
+
                     case HomeAdapter.MERCHANDISE_VIEW_TYPE:
                         span = 1;
                         break;
@@ -229,16 +238,54 @@ public class HomeFragment extends Fragment {
                                         home_page_bean.setId(object.getInt("id"));
                                         break;
 
-                                    case HomeAdapter.BANNER_VIEW_TYPE:
-                                        JSONArray banner_urls = object.getJSONArray("banner_urls");
-                                        int banner_cnt = banner_urls.length();
-                                        ArrayList<String> urls = new ArrayList<>();
-                                        for(int index = 0; index < banner_cnt; ++index){
-                                            urls.add(banner_urls.get(index).toString());
-                                           // Toast.makeText(getContext(), "url: " + banner_urls.get(index).toString(), Toast.LENGTH_SHORT).show();
+                                    case HomeAdapter.COMMONFUNC_VIEW_TYPE:
+
+                                        ArrayList<HomePageBean.CommonFunctionBean> common_func_beans = new ArrayList<>();
+
+                                        JSONArray common_func_entities = object.getJSONArray("common_functions");
+                                        for(int j = 0; j < common_func_entities.length(); ++j){
+                                            JSONObject common_func_entity = common_func_entities.getJSONObject(j);
+
+                                            HomePageBean.CommonFunctionBean common_func_bean = new HomePageBean().new CommonFunctionBean();
+                                            common_func_bean.setPicUrl(common_func_entity.getString("pic_url"));
+                                            common_func_bean.setPicDescription(common_func_entity.getString("pic_description"));
+                                            common_func_bean.setTargetData(common_func_entity.getString("target_data"));
+                                            common_func_beans.add(common_func_bean);
                                         }
 
-                                        home_page_bean.setBanner_urls(urls);
+                                        home_page_bean.setCommonFuncBeans(common_func_beans);
+
+                                        break;
+
+                                    case HomeAdapter.QUERYMORE_VIEW_TYPE:
+                                        break;
+
+                                    case HomeAdapter.BANNER_VIEW_TYPE:
+
+                                        ArrayList<HomePageBean.BannerBean> banners = new ArrayList<>();
+
+                                        JSONArray banner_entities = object.getJSONArray("banner_entities");
+                                        for(int j = 0; j < banner_entities.length(); ++j){
+                                            JSONObject banner_entity = banner_entities.getJSONObject(j);
+
+                                            HomePageBean.BannerBean banner_bean = new HomePageBean().new BannerBean();
+                                            banner_bean.setUrl(banner_entity.getString("url"));
+                                            banner_bean.setTitle("title");
+                                            banner_bean.setTargetData("target_data");
+                                            banners.add(banner_bean);
+                                        }
+
+                                        home_page_bean.setBannerBeans(banners);
+
+//                                        JSONArray banner_urls = object.getJSONArray("banner_urls");
+//                                        int banner_cnt = banner_urls.length();
+//                                        ArrayList<String> urls = new ArrayList<>();
+//                                        for(int index = 0; index < banner_cnt; ++index){
+//                                            urls.add(banner_urls.get(index).toString());
+//                                            // Toast.makeText(getContext(), "url: " + banner_urls.get(index).toString(), Toast.LENGTH_SHORT).show();
+//                                        }
+//
+//                                        home_page_bean.setBanner_urls(urls);
 
                                         //Toast.makeText(getContext(), "size: " + banner_urls.length(), Toast.LENGTH_SHORT).show();
                                         break;
