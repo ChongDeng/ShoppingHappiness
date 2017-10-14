@@ -25,6 +25,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.android.volley.Response;
@@ -35,6 +36,7 @@ import com.chongdeng.jufeng.shoppinghappiness.HomeActivity;
 import com.chongdeng.jufeng.shoppinghappiness.HomeAdapter;
 import com.chongdeng.jufeng.shoppinghappiness.MerchandiseAdapter;
 import com.chongdeng.jufeng.shoppinghappiness.MerchandiseInfoActivity;
+import com.chongdeng.jufeng.shoppinghappiness.MerchandiseSearchPageActivity;
 import com.chongdeng.jufeng.shoppinghappiness.R;
 
 import org.json.JSONArray;
@@ -70,6 +72,9 @@ public class HomeFragment extends Fragment {
 
     @BindView(R.id.home_recyclerView)
     RecyclerView recyclerView;
+
+    @BindView(R.id.merchandise_serch)
+    ImageView search_icon;
 
     //private RecyclerView recyclerView;
     private HomeAdapter adapter;
@@ -114,14 +119,18 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-   // Inflate the layout for this fragment
+        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
         ButterKnife.bind(this, view);
 
-
-
-     //   recyclerView = (RecyclerView) view.findViewById(R.id.home_recyclerView);
+        search_icon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent it = new Intent(getActivity(), MerchandiseSearchPageActivity.class);
+                startActivity(it);
+            }
+        });
 
         home_page_bean_list = new ArrayList<>();
         adapter = new HomeAdapter(getActivity(), home_page_bean_list);

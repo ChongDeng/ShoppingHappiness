@@ -30,7 +30,8 @@
         <activity
             android:name=".MerchandiseSearchPageActivity"
             android:theme="@style/MyTheme" />
-        <activity android:name=".MerchandiseSearchResultActivity"></activity>
+        <activity android:name=".MerchandiseSearchResultActivity"
+            android:label=""></activity>
     </application>
 
 </manifest>

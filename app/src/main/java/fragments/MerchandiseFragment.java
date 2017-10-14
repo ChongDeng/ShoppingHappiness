@@ -193,54 +193,6 @@ public class MerchandiseFragment extends Fragment {
         });
     }
 
-//    private void getMerchandise() {
-//        int[] covers = new int[]{
-//                R.drawable.album1,
-//                R.drawable.album2,
-//                R.drawable.album3,
-//                R.drawable.album4,
-//                R.drawable.album5,
-//                R.drawable.album6,
-//                R.drawable.album7,
-//                R.drawable.album8,
-//                R.drawable.album9,
-//                R.drawable.album10,
-//                R.drawable.album11};
-//
-//        Merchandise a = new Merchandise("True Romance", 13, covers[0]);
-//        merchandiseList.add(a);
-//
-//        a = new Merchandise("Xscpae", 8, covers[1]);
-//        merchandiseList.add(a);
-//
-//        a = new Merchandise("Maroon 5", 11, covers[2]);
-//        merchandiseList.add(a);
-//
-//        a = new Merchandise("Born to Die", 12, covers[3]);
-//        merchandiseList.add(a);
-//
-//        a = new Merchandise("Honeymoon", 14, covers[4]);
-//        merchandiseList.add(a);
-//
-//        a = new Merchandise("I Need a Doctor", 1, covers[5]);
-//        merchandiseList.add(a);
-//
-//        a = new Merchandise("Loud", 11, covers[6]);
-//        merchandiseList.add(a);
-//
-//        a = new Merchandise("Legend", 14, covers[7]);
-//        merchandiseList.add(a);
-//
-//        a = new Merchandise("Hello", 11, covers[8]);
-//        merchandiseList.add(a);
-//
-//        a = new Merchandise("Greatest Hits", 17, covers[9]);
-//        merchandiseList.add(a);
-//
-//        adapter.notifyDataSetChanged();
-//    }
-
-
     private void getMerchandiseList() {
         JsonArrayRequest req = new JsonArrayRequest(AppConfig.URL_MERCHANDISE_LIST,
                 new Response.Listener<JSONArray>() {
