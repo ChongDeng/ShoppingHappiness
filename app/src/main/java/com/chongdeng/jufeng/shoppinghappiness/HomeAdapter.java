@@ -180,7 +180,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.MyViewHolder> 
                 ImageView thumbnail = (ImageView) holder.getView(R.id.thumbnail);
 
                 title.setText(home_page_bean.getName());
-                count.setText(home_page_bean.getNumOfSongs() + " songs");
+                count.setText(home_page_bean.getNumOfSongs() + " views");
 
                 // loading album cover using Glide library
                 Glide.with(mContext).load(home_page_bean.getThumbnail()).into(thumbnail);
