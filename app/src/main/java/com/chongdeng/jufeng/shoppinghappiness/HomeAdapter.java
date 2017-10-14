@@ -97,7 +97,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.MyViewHolder> 
 
             case MERCHANDISE_VIEW_TYPE:
                 itemView = LayoutInflater.from(parent.getContext())
-                        .inflate(R.layout.favourites_merchandise_cardview_item, parent, false);
+                        .inflate(R.layout.merchandise_cardview_item, parent, false);
                 break;
         }
 

@@ -73,14 +73,32 @@
                 app:layout_collapseMode="pin"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
+                <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/drawer"
+                    android:layout_alignParentLeft="true"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="全部商品"
+                    style="@style/WhiteBoldTextStyleTitle"
+                    android:layout_centerInParent="true"
+                    />
 
                 <ImageView
                     android:id="@+id/merchandise_serch"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="right"
+                    android:layout_alignParentRight="true"
                     android:paddingRight="5dp"
                     android:src="@drawable/ic_action_search"/>
+            </RelativeLayout>
 
             </android.support.v7.widget.Toolbar>
 

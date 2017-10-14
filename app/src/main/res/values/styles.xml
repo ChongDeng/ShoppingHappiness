@@ -26,6 +26,12 @@
         <item name="android:textSize">@dimen/font_large</item>
         <item name="android:textColor">@color/white</item>
     </style>
+    <style name="WhiteBoldTextStyleTitle">
+        <item name="android:textSize">@dimen/font_large</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
     <style name="greyTextStyleSmall">
         <item name="android:textSize">@dimen/font_small</item>
         <item name="android:textColor">@color/grey_text_color_normal</item>
