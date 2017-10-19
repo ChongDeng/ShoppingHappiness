@@ -2,7 +2,7 @@ package configs;
 
 public class AppConfig {
 //	public static String restful_url_prefix = "http://192.168.1.88/ShoppingBackend/";
-    public static String restful_url_prefix = "http://192.168.1.88/ShoppingBackend/";
+    public static String restful_url_prefix = "http://172.19.33.105/ShoppingBackend/";
 	// Server user login url
 	public static String URL_LOGIN = restful_url_prefix + "login.php";
 
@@ -17,4 +17,6 @@ public class AppConfig {
 	public static final String URL_MERCHANDISE_Review = restful_url_prefix + "json/merchandise_review.json";
 
 	public static final String URL_HOME_PAGE_DATA = restful_url_prefix + "json/home_page_data.json";
+
+	public static final String URL_USR_THUMB = restful_url_prefix + "fileUpload.php";
 }

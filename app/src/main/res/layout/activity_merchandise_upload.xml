@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/uploadLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#373447"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+       >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="返回"
+            android:textColor="#CEC9E7"
+            android:textSize="16sp"
+            android:paddingLeft="10dp"
+            android:paddingTop="5dp"
+            android:layout_alignParentLeft="true"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="发布"
+            android:textColor="#CEC9E7"
+            android:textSize="16sp"
+            android:paddingRight="10dp"
+            android:paddingTop="5dp"
+            android:layout_alignParentRight="true"
+            />
+
+    </RelativeLayout>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@android:color/white"
+        android:hint="请输入商品名字"
+        android:padding="10dp"
+        android:singleLine="true"
+        android:textColor="#373447"
+        android:textSize="16sp" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@android:color/white"
+        android:hint="请输入商品价格"
+        android:padding="10dp"
+        android:singleLine="true"
+        android:textColor="#373447"
+        android:textSize="16sp" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="1dp"
+        android:background="@android:color/white"
+        android:gravity="top"
+        android:hint="请输入商品描述"
+        android:padding="10dp"
+        android:textColor="#373447"
+        android:textSize="16sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="添加商品图片"
+        android:textColor="#CEC9E7"
+        android:textSize="16sp" />
+
+    <!-- 显示图片 -->
+    <RelativeLayout
+        android:id="@+id/Content_Layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_alignParentBottom="true" >
+            <!-- 设置运行多行 设置圆角图形 黑色字体-->
+
+            <GridView
+                android:id="@+id/PicGridView"
+                android:layout_width="fill_parent"
+                android:layout_height="200dp"
+                android:layout_margin="10dp"
+                android:background="#EFDFDF"
+                android:horizontalSpacing="5dp"
+                android:verticalSpacing="5dp"
+                android:numColumns="4"
+                android:columnWidth="90dp"
+                android:stretchMode="columnWidth"
+                android:gravity="center" >
+            </GridView>
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="(友情提示:只能添加9张图片,点击图片可以删除已添加图片)"
+                android:textColor="#CEC9E7"
+                android:gravity="center" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</LinearLayout>

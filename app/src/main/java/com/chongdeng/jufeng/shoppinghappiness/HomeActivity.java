@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import fragments.BottomNavFragment;
 import fragments.FavoritesFragment;
 import fragments.HomeFragment;
+import fragments.MeFragment;
 import fragments.MerchandiseFragment;
 import helper.BottomNavigationViewHelper;
 
@@ -93,8 +94,7 @@ public class HomeActivity extends AppCompatActivity {
 //                        getColorFromRes(R.color.color_home));
                 break;
             case R.id.action_me:
-                frag = BottomNavFragment.newInstance("About Me",
-                        getColorFromRes(R.color.color_home));
+                frag = MeFragment.newInstance("About Me", "");
                 break;
         }
 
