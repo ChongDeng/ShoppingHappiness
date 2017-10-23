@@ -1,6 +1,7 @@
 package com.chongdeng.jufeng.shoppinghappiness;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -24,9 +25,20 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.chongdeng.jufeng.shoppinghappiness.restful_client.ApiClient;
+import com.chongdeng.jufeng.shoppinghappiness.restful_client.ApiInterface;
+import com.chongdeng.jufeng.shoppinghappiness.restful_model.UploadResult;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
+
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MerchandiseUploadActivity extends Activity {
 
@@ -40,6 +52,15 @@ public class MerchandiseUploadActivity extends Activity {
 
     private String ImagePath;                     //选择图片路径
     private static final String IMAGE_FILE_NAME = "merchandise_pic.jpg";
+
+    private TextView cancel_tv;
+    private TextView post_tv;
+
+    private TextView merchandise_desc_tv;
+    private TextView merchandise_name_tv;
+    private TextView merchandise_price_tv;
+
+    private static ProgressDialog pd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +77,25 @@ public class MerchandiseUploadActivity extends Activity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         setContentView(R.layout.activity_merchandise_upload);
+
+        cancel_tv = (TextView) findViewById(R.id.cancel_tv);
+        cancel_tv.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
+        post_tv = (TextView) findViewById(R.id.post_tv);
+        post_tv.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                //pd = ProgressDialog.show(getBaseContext(), null, "is uploading...");
+                new Thread(UploadMerchandise).start();
+            }
+        });
+
+        merchandise_name_tv = (TextView) findViewById(R.id.merchandise_name);
+        merchandise_price_tv = (TextView) findViewById(R.id.merchandise_price);
+        merchandise_desc_tv = (TextView) findViewById(R.id.merchandise_desc);
 
         PicGridView = (GridView) findViewById(R.id.PicGridView);
 
@@ -188,8 +228,6 @@ public class MerchandiseUploadActivity extends Activity {
             cursor.moveToFirst();
             ImagePath = cursor.getString(cursor
                     .getColumnIndex(MediaStore.Images.Media.DATA));
-            int i = 0;
-            ++i;
         }
         //拍照
         else if(resultCode==RESULT_OK && requestCode==TAKE_PHOTO) {
@@ -248,5 +286,66 @@ public class MerchandiseUploadActivity extends Activity {
             ImagePath = null;
         }
     }
+
+    Runnable UploadMerchandise = new Runnable() {
+        @Override
+        public void run() {
+            String merchandise_name = merchandise_name_tv.getText().toString();
+            String merchandise_price = merchandise_price_tv.getText().toString();
+            String merchandise_desc = merchandise_desc_tv.getText().toString();
+
+            if(TextUtils.isEmpty(merchandise_name)){
+                Toast.makeText(getApplicationContext(), "Please input mechandise name!" , Toast.LENGTH_SHORT).show();
+                return;
+            }
+            if(TextUtils.isEmpty(merchandise_price)){
+                Toast.makeText(getApplicationContext(), "Please input mechandise price!" , Toast.LENGTH_SHORT).show();
+                return;
+            }
+            if(TextUtils.isEmpty(merchandise_desc)){
+                Toast.makeText(getApplicationContext(), "Please input mechandise description!" , Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            if(ImageItems.size() == 1){
+                Toast.makeText(getApplicationContext(), "Please add picture to upload!" , Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            ApiInterface apiService =
+                    ApiClient.getClient().create(ApiInterface.class);
+
+            Map<String,RequestBody> params = new HashMap<String, RequestBody>();
+
+            for(HashMap<String, Object> ImageItem : ImageItems){
+                String ImagePath = ImageItem.get("ImagePath").toString();
+                if(ImagePath != "add_pic"){
+                    File ImageFile = new File(ImagePath);
+                    final RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/form-data"),ImageFile);
+                    params.put("upload_file[]\"; filename=\""+ImageFile.getName()+"", requestBody);
+                }
+            }
+
+            Call<UploadResult> model = apiService.UploadMerchandise(merchandise_name, merchandise_price, merchandise_desc, params);
+
+
+            model.enqueue(new Callback<UploadResult>() {
+                @Override
+                public void onResponse(Call<UploadResult> call, Response<UploadResult> response) {
+                    Toast.makeText(getApplicationContext(), response.body().getMsg() , Toast.LENGTH_SHORT).show();
+//                    if (pd.isShowing())
+//                        pd.dismiss();
+                    finish();
+                }
+                @Override
+                public void onFailure(Call<UploadResult> call, Throwable t) {
+                    Toast.makeText(getApplicationContext(), "error: " + t.toString(), Toast.LENGTH_LONG).show();
+//                    if (pd.isShowing())
+//                        pd.dismiss();
+                }
+            });
+        }
+    };
+
 
 }

@@ -10,20 +10,31 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import helper.FileUtil;
 import helper.SelectPicPopupWindow;
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import com.chongdeng.jufeng.shoppinghappiness.MerchandiseUploadActivity;
 import com.chongdeng.jufeng.shoppinghappiness.R;
+import com.chongdeng.jufeng.shoppinghappiness.restful_client.ApiClient;
+import com.chongdeng.jufeng.shoppinghappiness.restful_client.ApiInterface;
+import com.chongdeng.jufeng.shoppinghappiness.restful_model.UploadResult;
 
 import java.io.File;
+import java.io.IOException;
 
 public class MeFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
@@ -178,15 +189,35 @@ public class MeFragment extends Fragment {
             UrlPath = FileUtil.saveFile(getContext(), "temphead.jpg", photo);
             UserThumbnail.setImageDrawable(drawable);
 
-            //pd = ProgressDialog.show(getContext(), null, "is uploading...");
-            //new Thread(UploadImageRunnable).start();
+            pd = ProgressDialog.show(getContext(), null, "is uploading...");
+            new Thread(UploadImageRunnable).start();
         }
     }
-
 
     Runnable UploadImageRunnable = new Runnable() {
         @Override
         public void run() {
+
+            ApiInterface apiService =
+                    ApiClient.getClient().create(ApiInterface.class);
+
+            File AvatarImgFile = new File(UrlPath);
+            final RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/form-data"),AvatarImgFile);
+            int UserId = 123;
+            Call<UploadResult> model = apiService.uploadProfileImage(UserId, requestBody);
+
+            model.enqueue(new Callback<UploadResult>() {
+                @Override
+                public void onResponse(Call<UploadResult> call, Response<UploadResult> response) {
+                    Toast.makeText(MeFragment.this.getContext(), response.body().getMsg() , Toast.LENGTH_SHORT).show();
+                    pd.hide();
+                }
+                @Override
+                public void onFailure(Call<UploadResult> call, Throwable t) {
+                    Toast.makeText(MeFragment.this.getContext(), "error: " + t.toString(), Toast.LENGTH_LONG).show();
+                    pd.hide();
+                }
+            });
         }
     };
 

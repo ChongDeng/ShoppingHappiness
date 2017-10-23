@@ -12,6 +12,7 @@
        >
 
         <TextView
+            android:id="@+id/cancel_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="返回"
@@ -22,6 +23,7 @@
             android:layout_alignParentLeft="true"/>
 
         <TextView
+            android:id="@+id/post_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="发布"
@@ -35,6 +37,7 @@
     </RelativeLayout>
 
     <EditText
+        android:id="@+id/merchandise_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
@@ -48,6 +51,7 @@
         android:textSize="16sp" />
 
     <EditText
+        android:id="@+id/merchandise_price"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
@@ -61,6 +65,7 @@
         android:textSize="16sp" />
 
     <EditText
+        android:id="@+id/merchandise_desc"
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:layout_marginLeft="10dp"
