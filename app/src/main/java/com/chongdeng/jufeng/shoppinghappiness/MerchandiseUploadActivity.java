@@ -88,7 +88,7 @@ public class MerchandiseUploadActivity extends Activity {
         post_tv = (TextView) findViewById(R.id.post_tv);
         post_tv.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                //pd = ProgressDialog.show(getBaseContext(), null, "is uploading...");
+                pd = ProgressDialog.show(MerchandiseUploadActivity.this, null, "is uploading...");
                 new Thread(UploadMerchandise).start();
             }
         });
@@ -326,6 +326,7 @@ public class MerchandiseUploadActivity extends Activity {
                 }
             }
 
+
             Call<UploadResult> model = apiService.UploadMerchandise(merchandise_name, merchandise_price, merchandise_desc, params);
 
 
@@ -333,15 +334,15 @@ public class MerchandiseUploadActivity extends Activity {
                 @Override
                 public void onResponse(Call<UploadResult> call, Response<UploadResult> response) {
                     Toast.makeText(getApplicationContext(), response.body().getMsg() , Toast.LENGTH_SHORT).show();
-//                    if (pd.isShowing())
-//                        pd.dismiss();
+                    if (pd.isShowing())
+                        pd.dismiss();
                     finish();
                 }
                 @Override
                 public void onFailure(Call<UploadResult> call, Throwable t) {
                     Toast.makeText(getApplicationContext(), "error: " + t.toString(), Toast.LENGTH_LONG).show();
-//                    if (pd.isShowing())
-//                        pd.dismiss();
+                    if (pd.isShowing())
+                        pd.dismiss();
                 }
             });
         }
