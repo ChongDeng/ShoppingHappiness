@@ -12,7 +12,11 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.app.Activity;
 import android.os.Environment;
+import android.os.Handler;
+import android.os.Message;
 import android.provider.MediaStore;
+import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.Window;
@@ -27,6 +31,8 @@ import android.widget.Toast;
 
 import com.chongdeng.jufeng.shoppinghappiness.restful_client.ApiClient;
 import com.chongdeng.jufeng.shoppinghappiness.restful_client.ApiInterface;
+import com.chongdeng.jufeng.shoppinghappiness.restful_client.DefaultProgressListener;
+import com.chongdeng.jufeng.shoppinghappiness.restful_client.UploadFileRequestBody;
 import com.chongdeng.jufeng.shoppinghappiness.restful_model.UploadResult;
 
 import java.io.File;
@@ -34,13 +40,18 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import fragments.UploadProgressDialogFragment;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
-public class MerchandiseUploadActivity extends Activity {
+
+public class MerchandiseUploadActivity extends AppCompatActivity {
 
     private GridView PicGridView;
     private SimpleAdapter simpleAdapter;
@@ -61,6 +72,8 @@ public class MerchandiseUploadActivity extends Activity {
     private TextView merchandise_price_tv;
 
     private static ProgressDialog pd;
+
+    UploadProgressDialogFragment ProgressDialog = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,8 +101,10 @@ public class MerchandiseUploadActivity extends Activity {
         post_tv = (TextView) findViewById(R.id.post_tv);
         post_tv.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                pd = ProgressDialog.show(MerchandiseUploadActivity.this, null, "is uploading...");
-                new Thread(UploadMerchandise).start();
+                //pd = ProgressDialog.show(MerchandiseUploadActivity.this, null, "is uploading...");
+                //new Thread(UploadMerchandise).start();
+
+                UploadMerchandise();
             }
         });
 
@@ -287,66 +302,145 @@ public class MerchandiseUploadActivity extends Activity {
         }
     }
 
-    Runnable UploadMerchandise = new Runnable() {
-        @Override
-        public void run() {
+//    Runnable UploadMerchandise = new Runnable() {
+//        @Override
+//        public void run() {
+//            String merchandise_name = merchandise_name_tv.getText().toString();
+//            String merchandise_price = merchandise_price_tv.getText().toString();
+//            String merchandise_desc = merchandise_desc_tv.getText().toString();
+//
+//            if(TextUtils.isEmpty(merchandise_name)){
+//                Toast.makeText(getApplicationContext(), "Please input mechandise name!" , Toast.LENGTH_SHORT).show();
+//                return;
+//            }
+//            if(TextUtils.isEmpty(merchandise_price)){
+//                Toast.makeText(getApplicationContext(), "Please input mechandise price!" , Toast.LENGTH_SHORT).show();
+//                return;
+//            }
+//            if(TextUtils.isEmpty(merchandise_desc)){
+//                Toast.makeText(getApplicationContext(), "Please input mechandise description!" , Toast.LENGTH_SHORT).show();
+//                return;
+//            }
+//
+//            if(ImageItems.size() == 1){
+//                Toast.makeText(getApplicationContext(), "Please add picture to upload!" , Toast.LENGTH_SHORT).show();
+//                return;
+//            }
+//
+//            ApiInterface apiService =
+//                    ApiClient.getClient().create(ApiInterface.class);
+//
+//            Map<String,RequestBody> params = new HashMap<String, RequestBody>();
+//
+//            for(HashMap<String, Object> ImageItem : ImageItems){
+//                String ImagePath = ImageItem.get("ImagePath").toString();
+//                if(ImagePath != "add_pic"){
+//                    File ImageFile = new File(ImagePath);
+//                    final RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/form-data"),ImageFile);
+//                    params.put("upload_file[]\"; filename=\""+ImageFile.getName()+"", requestBody);
+//                }
+//            }
+//
+//
+//            Call<UploadResult> model = apiService.UploadMerchandise(merchandise_name, merchandise_price, merchandise_desc, params);
+//
+//
+//            model.enqueue(new Callback<UploadResult>() {
+//                @Override
+//                public void onResponse(Call<UploadResult> call, Response<UploadResult> response) {
+//                    Toast.makeText(getApplicationContext(), response.body().getMsg() , Toast.LENGTH_SHORT).show();
+//                    if (pd.isShowing())
+//                        pd.dismiss();
+//                    finish();
+//                }
+//                @Override
+//                public void onFailure(Call<UploadResult> call, Throwable t) {
+//                    Toast.makeText(getApplicationContext(), "error: " + t.toString(), Toast.LENGTH_LONG).show();
+//                    if (pd.isShowing())
+//                        pd.dismiss();
+//                }
+//            });
+//        }
+//    };
+
+    void UploadMerchandise() {
             String merchandise_name = merchandise_name_tv.getText().toString();
             String merchandise_price = merchandise_price_tv.getText().toString();
             String merchandise_desc = merchandise_desc_tv.getText().toString();
 
-            if(TextUtils.isEmpty(merchandise_name)){
-                Toast.makeText(getApplicationContext(), "Please input mechandise name!" , Toast.LENGTH_SHORT).show();
+            if (TextUtils.isEmpty(merchandise_name)) {
+                Toast.makeText(getApplicationContext(), "Please input mechandise name!", Toast.LENGTH_SHORT).show();
                 return;
             }
-            if(TextUtils.isEmpty(merchandise_price)){
-                Toast.makeText(getApplicationContext(), "Please input mechandise price!" , Toast.LENGTH_SHORT).show();
+            if (TextUtils.isEmpty(merchandise_price)) {
+                Toast.makeText(getApplicationContext(), "Please input mechandise price!", Toast.LENGTH_SHORT).show();
                 return;
             }
-            if(TextUtils.isEmpty(merchandise_desc)){
-                Toast.makeText(getApplicationContext(), "Please input mechandise description!" , Toast.LENGTH_SHORT).show();
+            if (TextUtils.isEmpty(merchandise_desc)) {
+                Toast.makeText(getApplicationContext(), "Please input mechandise description!", Toast.LENGTH_SHORT).show();
                 return;
             }
 
-            if(ImageItems.size() == 1){
-                Toast.makeText(getApplicationContext(), "Please add picture to upload!" , Toast.LENGTH_SHORT).show();
+            if (ImageItems.size() == 1) {
+                Toast.makeText(getApplicationContext(), "Please add picture to upload!", Toast.LENGTH_SHORT).show();
                 return;
             }
+
+            Map<String, String> optionMap = new HashMap<>();
+            optionMap.put("merchandise_name", merchandise_name);
+            optionMap.put("merchandise_price", merchandise_price);
+            optionMap.put("merchandise_desc", merchandise_desc);
 
             ApiInterface apiService =
-                    ApiClient.getClient().create(ApiInterface.class);
+                    ApiClient.getFileUpLoadRetrofitClient().create(ApiInterface.class);
 
-            Map<String,RequestBody> params = new HashMap<String, RequestBody>();
+            Map<String, RequestBody> requestBodyMap = new HashMap<>();
 
-            for(HashMap<String, Object> ImageItem : ImageItems){
+            int FileIndex = 0;
+            for (HashMap<String, Object> ImageItem : ImageItems) {
                 String ImagePath = ImageItem.get("ImagePath").toString();
-                if(ImagePath != "add_pic"){
+                if (ImagePath != "add_pic") {
                     File ImageFile = new File(ImagePath);
-                    final RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/form-data"),ImageFile);
-                    params.put("upload_file[]\"; filename=\""+ImageFile.getName()+"", requestBody);
+
+                    UploadFileRequestBody fileRequestBody = new UploadFileRequestBody(ImageFile, new DefaultProgressListener(mHandler, FileIndex));
+                    requestBodyMap.put("dc_file[]\"; filename=\"" + ImageFile.getName() + "", fileRequestBody);
+
+                    ++FileIndex;
                 }
             }
 
+            FragmentManager fm = getSupportFragmentManager();
+            ProgressDialog = new UploadProgressDialogFragment();
+            ProgressDialog.show(fm, "Upload Dialog");
 
-            Call<UploadResult> model = apiService.UploadMerchandise(merchandise_name, merchandise_price, merchandise_desc, params);
+            apiService.UploadMerchandiseInfo(optionMap, requestBodyMap).
+                subscribeOn(Schedulers.io()).
+                observeOn(AndroidSchedulers.mainThread()).
+                subscribe(new Subscriber<UploadResult>() {
+                    @Override
+                    public void onCompleted() {
+                    }
 
+                    @Override
+                    public void onError(Throwable e) {
+                        System.out.println("---the error is ---" + e);
+                    }
 
-            model.enqueue(new Callback<UploadResult>() {
-                @Override
-                public void onResponse(Call<UploadResult> call, Response<UploadResult> response) {
-                    Toast.makeText(getApplicationContext(), response.body().getMsg() , Toast.LENGTH_SHORT).show();
-                    if (pd.isShowing())
-                        pd.dismiss();
-                    finish();
-                }
-                @Override
-                public void onFailure(Call<UploadResult> call, Throwable t) {
-                    Toast.makeText(getApplicationContext(), "error: " + t.toString(), Toast.LENGTH_LONG).show();
-                    if (pd.isShowing())
-                        pd.dismiss();
-                }
+                    @Override
+                    public void onNext(UploadResult res) {
+                        System.out.println("---the next string is --" + res.getMsg());
+                    }
             });
-        }
     };
 
+    private Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+        if (msg.what > 0) {
+            ProgressDialog.UpdateProgress(msg.what);
+            System.out.println(msg.what + "%");
+        }
+        }
+    };
 
 }
