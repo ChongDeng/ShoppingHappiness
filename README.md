@@ -4,6 +4,7 @@
 implemented following features, and am still developing on this app:
 
  (1) merchandise list display
+ 
  (2) merchandise detail module: inlcuding details description, read/write review
  (3) merchandse search ui and search result display
  (4) collect and review favourite merchandise 
